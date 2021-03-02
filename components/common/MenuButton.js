@@ -1,12 +1,11 @@
 import React, { useState, useRef } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Menu from 'components/common/Menu';
 import Button from 'components/common/Button';
 import useDocumentClick from 'hooks/useDocumentClick';
 import styles from './MenuButton.module.css';
 
-function MenuButton({
+export default function MenuButton({
   icon,
   value,
   options,
@@ -31,7 +30,7 @@ function MenuButton({
   }
 
   useDocumentClick(e => {
-    if (!ref.current?.contains(e.target)) {
+    if (!ref.current.contains(e.target)) {
       setShowMenu(false);
     }
   });
@@ -59,25 +58,3 @@ function MenuButton({
     </div>
   );
 }
-
-MenuButton.propTypes = {
-  icon: PropTypes.node,
-  value: PropTypes.any,
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.node,
-      value: PropTypes.any,
-      className: PropTypes.string,
-      render: PropTypes.func,
-      divider: PropTypes.bool,
-    }),
-  ),
-  buttonClassName: PropTypes.string,
-  menuClassName: PropTypes.string,
-  menuPosition: PropTypes.oneOf(['top', 'bottom']),
-  menuAlign: PropTypes.oneOf(['left', 'right']),
-  onSelect: PropTypes.func,
-  renderValue: PropTypes.func,
-};
-
-export default MenuButton;

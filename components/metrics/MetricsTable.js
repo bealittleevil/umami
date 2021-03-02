@@ -17,6 +17,7 @@ import styles from './MetricsTable.module.css';
 
 export default function MetricsTable({
   websiteId,
+  websiteDomain,
   type,
   className,
   dataFilter,
@@ -41,6 +42,7 @@ export default function MetricsTable({
         type,
         start_at: +startDate,
         end_at: +endDate,
+        domain: websiteDomain,
         url,
       },
       onDataLoad,

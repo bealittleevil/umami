@@ -1,10 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import NoData from 'components/common/NoData';
 import styles from './Table.module.css';
 
-function Table({
+export default function Table({
   columns,
   rows,
   empty,
@@ -45,34 +44,6 @@ function Table({
     </div>
   );
 }
-
-const styledObject = PropTypes.shape({
-  className: PropTypes.string,
-  style: PropTypes.object,
-});
-
-Table.propTypes = {
-  columns: PropTypes.arrayOf(
-    PropTypes.shape({
-      cell: styledObject,
-      className: PropTypes.string,
-      header: styledObject,
-      key: PropTypes.string,
-      label: PropTypes.node,
-      render: PropTypes.func,
-      style: PropTypes.object,
-    }),
-  ),
-  rows: PropTypes.arrayOf(PropTypes.object),
-  empty: PropTypes.node,
-  className: PropTypes.string,
-  bodyClassName: PropTypes.string,
-  rowKey: PropTypes.func,
-  showHeader: PropTypes.bool,
-  children: PropTypes.node,
-};
-
-export default Table;
 
 export const TableRow = ({ columns, row }) => (
   <div className={classNames(styles.row, 'row')}>

@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import ChartJS from 'chart.js';
 import Legend from 'components/metrics/Legend';
 import { formatLongNumber } from 'lib/format';
-import { dateFormat } from 'lib/date';
+import { dateFormat } from 'lib/lang';
 import useLocale from 'hooks/useLocale';
 import useTheme from 'hooks/useTheme';
 import { DEFAUL_CHART_HEIGHT, DEFAULT_ANIMATION_DURATION, THEME_COLORS } from 'lib/constants';
@@ -44,9 +44,9 @@ export default function BarChart({
 
     switch (unit) {
       case 'minute':
-        return index % 2 === 0 ? dateFormat(d, 'H:mm', locale) : '';
+        return index % 2 === 0 ? dateFormat(d, 'h:mm', locale) : '';
       case 'hour':
-        return dateFormat(d, 'p', locale);
+        return dateFormat(d, 'ha', locale);
       case 'day':
         if (records > 31) {
           if (w <= 500) {
@@ -93,9 +93,9 @@ export default function BarChart({
   function getTooltipFormat(unit) {
     switch (unit) {
       case 'hour':
-        return 'EEE p — PPP';
+        return 'EEE ha — MMM d yyyy';
       default:
-        return 'PPPP';
+        return 'EEE MMMM d yyyy';
     }
   }
 
@@ -131,7 +131,6 @@ export default function BarChart({
               minRotation: 0,
               maxRotation: 0,
               fontColor: colors.text,
-              autoSkipPadding: 1,
             },
             gridLines: {
               display: false,
@@ -176,7 +175,6 @@ export default function BarChart({
     options.scales.xAxes[0].ticks.callback = renderXLabel;
     options.scales.xAxes[0].ticks.fontColor = colors.text;
     options.scales.yAxes[0].ticks.fontColor = colors.text;
-    options.scales.yAxes[0].ticks.precision = 0;
     options.scales.yAxes[0].gridLines.color = colors.line;
     options.scales.yAxes[0].gridLines.zeroLineColor = colors.zeroLine;
     options.animation.duration = animationDuration;
